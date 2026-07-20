@@ -27,29 +27,29 @@ let handleInputChange = (event) => {
 
 
   return (
-    <div>
+    <div className='hero'>
       <h1>Welcome to intelliGit</h1>
       <input type="text"
       placeholder="Enter Github Profile"
       value={userName}
       onChange={handleInputChange}
+      style={{color: "white"}}
       >
       </input>
 
-      <button onClick={fetchUser}>Clicked</button>
-
+      <button onClick={fetchUser}>Search</button>
+     <br></br>
+     
      {user ?
     (
     <>
     <a href={user.html_url} target="_blank" rel="noopener noreferrer">
         View GitHub Profile
     </a>
-
     <p>Username: {user.login}</p>
     <p>Followers: {user.followers}</p>
     <p>Following: {user.following}</p>
       </>
-
     ) :  
      <p>No such user exists.</p>
 }
