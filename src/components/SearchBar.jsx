@@ -2,9 +2,8 @@ import React from 'react'
 import { useState } from "react";
 
 
-function SearchBar() {
+function SearchBar({userName, setUsername}) {
 
-const [userName, setUsername] = useState("");
 const [user, setUser] = useState(null);
 
 
@@ -14,7 +13,6 @@ async function fetchUser(){
   const data = await res.json();
   setUser(data);
   console.log(data);
-  setUsername("");
   }
    catch(e){
    console.log(e);
@@ -22,7 +20,9 @@ async function fetchUser(){
 }
 
 let handleInputChange = (event) => {
-  setUsername(event.target.value);
+    console.log("Typing:", event.target.value);
+
+setUsername(event.target.value);
 };
 
 
