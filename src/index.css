@@ -45,3 +45,36 @@ input {
     outline: none;
     transition: all 0.3s ease;
 }
+
+.repo{
+     display: flex;
+     flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card{
+   border: 1px solid white;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 1rem;
+}
+
+.profile {
+    background-color: #1E293B;
+    color: #F8FAFC;
+    border: 1px solid #334155;
+     display: flex;
+    flex-wrap: wrap;
+    border-radius: 1rem;
+}
+
+.user-info{
+    margin: 2rem;
+}

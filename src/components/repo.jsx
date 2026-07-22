@@ -2,30 +2,21 @@ import React from 'react'
 import { useState } from 'react'
 
 
-function repo({userName}) {
-    const[repo, setRepo] = useState("");
-// console.log(`https://api.github.com/users/${userName}/repos`);
-async function fetchRepo(){
-     try {
-     const res = await fetch(`https://api.github.com/users/${userName}/repos`);
-     const data = await res.json();
-     setRepo(data);
-     console.log(data);
-     setRepo("");
-  }
-   catch(e){
-   console.log(e);
-   }
-  }
- 
-
+function repo({repos}) {
 
 
   return (
-    <div>
-      <button onClick={fetchRepo}>Generate Repo</button>
+    <div className='repo'>
+        {repos.map((item) => (
+           <div className='card' key = {item.id}>
+              <h1>{item.name}</h1>
+              <p>{item.language}</p>
+<p>Last Push: {new Date(item.pushed_at).toLocaleDateString()}</p>
+<p>Last Updated: {new Date(item.updated_at).toLocaleDateString()}</p>           </div>
+        ))}
     </div>
   )
+
 }
 
 export default repo
