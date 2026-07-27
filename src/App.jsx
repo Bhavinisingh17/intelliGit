@@ -10,15 +10,15 @@ function App() {
 
   const [repos, setRepos] = useState([]);
 
-async function handleGenerate(){
-  const userRes = await fetch(`https://api.github.com/users/${userName}`);
-  const userData = await userRes.json();
-  console.log(userData);
-  setUser(userData);
+async function handleGenerate() {
+  const response = await fetch(
+    `http://localhost:5000/api/github/${userName}`
+  );
 
-  const repoRes = await fetch(`https://api.github.com/users/${userName}/repos`);
-  const repoData = await repoRes.json();
-  setRepos(repoData);
+  const data = await response.json();
+
+  setUser(data.user);
+  setRepos(data.repos);
 }
 
   return (
