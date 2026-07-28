@@ -10,9 +10,27 @@ const getGithubProfile = async (req, res) => {
         const user = await userRes.json();
         const repos = await repoRes.json();
 
-        res.json({
-            user,
-            repos
+const formattedRepos = repos.map(repo => ({
+    name: repo.name,
+    description: repo.description,
+    language: repo.language,
+    stars: repo.stargazers_count,
+    forks: repo.forks_count,
+    url: repo.html_url
+}));
+
+
+         res.json({
+            user: {
+                name: user.name,
+                username: user.login,
+                avatar: user.avatar_url,
+                followers: user.followers,
+                following: user.following,
+                publicRepos: user.public_repos,
+                url: user.html_url
+            },
+            repos: formattedRepos
         });
     } catch (err) {
         res.status(500).json({

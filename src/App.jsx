@@ -1,6 +1,7 @@
 import SearchBar from './components/SearchBar'
 import './App.css'
 import Repo from './components/repo';
+import Sidebar from "./components/sidebar/Sidebar.jsx";
 import { useState } from "react";
 
 
@@ -21,36 +22,48 @@ async function handleGenerate() {
   setRepos(data.repos);
 }
 
-  return (
-    <>
-     <SearchBar 
-     userName={userName}
-     setUsername={setUsername}
-     ></SearchBar>
+ return (
+  <div className="app">
 
-           <button onClick={handleGenerate}>Generate</button>
-           <div className='profile'>
- {user && (
-        <>
- <img
-    src={user.avatar_url}
-    alt={user.login}
-    className="profile-img"
-  />     
-  <div className='user-info'>
-    
-           <h2>{user.name}</h2>
-          <p>Followers: {user.followers}</p>
-          <p>Following: {user.following}</p>
-          <a href={user.html_url}>@{user.login}</a>
-  </div>
-  
-        </>
-      )}
+    <Sidebar />
+
+    <div className="main-content">
+
+   <SearchBar
+    userName={userName}
+    setUsername={setUsername}
+    handleGenerate={handleGenerate}
+  >
+  </SearchBar>
+
+
+
+      <div className="profile">
+        {user && (
+          <>
+            <img
+              src={user.avatar}
+              alt={user.username}
+              className="profile-img"
+            />
+
+            <div className="user-info">
+              <h2>{user.name}</h2>
+              <p>Followers: {user.followers}</p>
+              <p>Following: {user.following}</p>
+              <p>Public Repositories: {user.publicRepos}</p>
+              <a href={user.url}>@{user.username}</a>
+            </div>
+          </>
+        )}
       </div>
-     <Repo repos={repos}></Repo>
-    </>
-  )
+
+      <Repo repos={repos} />
+
+    </div>
+
+  </div>
+);
 }
 
 export default App
