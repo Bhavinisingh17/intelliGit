@@ -1,8 +1,12 @@
 import SearchBar from './components/SearchBar'
 import './App.css'
 import Repo from './components/repo';
+import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
+import Dashboard from "./components/dashboard/Dashboard.jsx";
+import Profile from "./components/profile/profile.jsx";
 import { useState } from "react";
+
 
 
 function App() {
@@ -29,36 +33,19 @@ async function handleGenerate() {
 
     <div className="main-content">
 
+     
+
    <SearchBar
     userName={userName}
     setUsername={setUsername}
     handleGenerate={handleGenerate}
   >
   </SearchBar>
-
-
-
-      <div className="profile">
-        {user && (
-          <>
-            <img
-              src={user.avatar}
-              alt={user.username}
-              className="profile-img"
-            />
-
-            <div className="user-info">
-              <h2>{user.name}</h2>
-              <p>Followers: {user.followers}</p>
-              <p>Following: {user.following}</p>
-              <p>Public Repositories: {user.publicRepos}</p>
-              <a href={user.url}>@{user.username}</a>
-            </div>
-          </>
-        )}
-      </div>
-
-      <Repo repos={repos} />
+   <Routes>
+         <Route path="/" element={<Dashboard></Dashboard>}></Route>
+          <Route path="/profile" element={<Profile user={user}/>}></Route>
+         <Route path="/repo" element={<Repo repos={repos}/>} />
+      </Routes>
 
     </div>
 

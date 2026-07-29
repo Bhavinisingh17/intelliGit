@@ -1,8 +1,10 @@
+@import "tailwindcss";
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  color: #2F241D;
+    color: #2F241D;
 }
 
 .main-content {
@@ -19,10 +21,43 @@ body {
 
 .hero {
     display: flex;
-    gap: 24px;
-    padding: 2rem;
+    align-items: center;
+    gap: 16px;
     width: 100%;
+    padding: 0 2rem 2rem 0rem;
+}
+
+.hero input {
     flex: 1;
+    min-width: 250px;
+    max-width: 500px;
+}
+
+.hero button {
+    flex-shrink: 0;
+}
+
+.hero p {
+    cursor: pointer;
+}
+
+
+/* Tablet */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero input,
+    .hero button {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero p {
+        text-align: center;
+    }
 }
 
 button {
@@ -30,7 +65,7 @@ button {
     color: #2F241D;
     border: none;
     padding: 12px 24px;
-    border-radius: 10px;
+    border-radius: 0.5rem;
     font-size: 16px;
     font-weight: 600;
     font-family: "Inter", sans-serif;
@@ -40,19 +75,39 @@ button {
 }
 
 input {
-    margin-top: 0;
-    color: #2F241D;
     width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    color: #2F241D;
     padding: 12px 16px;
     background-color: #E7D7BB;
     border: 1px solid #F7F1E7;
-    border-radius: 50px;
+    border-radius: 0.5rem;
     font-size: 16px;
     font-family: "Inter", sans-serif;
     outline: none;
     transition: all 0.3s ease;
 }
 
+/* Tablet */
+@media (max-width: 768px) {
+    input {
+        max-width: 90%;
+        font-size: 15px;
+        padding: 10px 14px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    input {
+        width: 100%;
+        max-width: 100%;
+        font-size: 14px;
+        padding: 10px 12px;
+        border-radius: 12px;
+    }
+}
 .repo{
      display: flex;
      flex-wrap: wrap;

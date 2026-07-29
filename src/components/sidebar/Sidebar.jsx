@@ -1,5 +1,7 @@
 import React from 'react'
 import "./sideBar.css";
+import { Link } from "react-router-dom";
+
 
 
 function Sidebar() {
@@ -12,29 +14,29 @@ function Sidebar() {
 
     <nav className="menu">
 
-        <div className="menu-item active">
+        <Link to="/" className="menu-item">
             📊 Dashboard
-        </div>
+        </Link>
 
-        <div className="menu-item">
+        <Link to="/profile" className="menu-item">
             👤 Profile
-        </div>
+        </Link>
 
-        <div className="menu-item">
+        <Link to="/repo" className="menu-item">
             📂 Repositories
-        </div>
+        </Link>
 
-        <div className="menu-item">
+        <Link to="/stats" className="menu-item">
             📈 Statistics
-        </div>
+        </Link>
 
-        <div className="menu-item">
+        <Link to="/analysis" className="menu-item">
             🤖 AI Analysis
-        </div>
+        </Link>
 
-        <div className="menu-item">
+        <Link to="/settings"className="menu-item">
             ⚙️ Settings
-        </div>
+        </Link>
 
     </nav>
 

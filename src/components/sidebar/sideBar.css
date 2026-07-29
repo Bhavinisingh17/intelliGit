@@ -3,10 +3,10 @@
     top: 0;
     left: 0;
 
-    width: 260px;
+    width: 250px;
     height: 100vh;
 
-    background: #F4ECE0;
+    background: #E7D7BB;
     border-right: 1px solid #E7D7BB;
     overflow-y: auto;
 }
