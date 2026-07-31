@@ -42,7 +42,7 @@ async function handleGenerate() {
   >
   </SearchBar>
    <Routes>
-         <Route path="/" element={<Dashboard></Dashboard>}></Route>
+         <Route path="/" element={<Dashboard user={user} />}></Route>
           <Route path="/profile" element={<Profile user={user}/>}></Route>
          <Route path="/repo" element={<Repo repos={repos}/>} />
       </Routes>
