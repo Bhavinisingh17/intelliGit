@@ -46,7 +46,7 @@ function Dashboard({user}) {
       </header>
 
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 !mt-4  text-[#2F241D] ">
- <div className="flex items-center gap-4 h-28 !p-4 rounded border border-[#E7D7BB] shadow-sm">
+ <div className="flex items-center gap-4 h-28 !p-4 rounded-xl border border-[#E7D7BB] shadow-sm">
 
   <div className="w-14 h-14 rounded-xl  flex items-center justify-center">
     <FolderOpen className="w-7 h-7 " />
@@ -60,7 +60,7 @@ function Dashboard({user}) {
   </div>
 
 </div>
-<div className="flex items-center gap-4 h-28 !p-4 rounded border border-[#E7D7BB]  shadow-sm">
+<div className="flex items-center gap-4 h-28 !p-4 rounded-xl border border-[#E7D7BB]  shadow-sm">
 
   <div className="w-14 h-14 rounded-xl flex items-center justify-center">
     <Users className="w-7 h-7" />
@@ -75,7 +75,7 @@ function Dashboard({user}) {
 
 </div>
 
-  <div className="flex items-center gap-4 h-28 !p-4 rounded border border-[#E7D7BB]  shadow-sm">
+  <div className="flex items-center gap-4 h-28 !p-4 rounded-xl border border-[#E7D7BB]  shadow-sm">
   <div className="w-14 h-14 rounded-xl  flex items-center justify-center">
     <UserPlus className="w-7 h-7" />
   </div>
@@ -88,7 +88,7 @@ function Dashboard({user}) {
   </div>
 </div>
 
-<div className="flex items-center gap-4 h-28 !p-4 rounded border border-[#E7D7BB]  shadow-sm">
+<div className="flex items-center gap-4 h-28 !p-4 rounded-xl border border-[#E7D7BB]  shadow-sm">
   <div className="w-14 h-14 rounded-xl  flex items-center justify-center">
     <Star className="w-7 h-7 text-yellow-500" />
   </div>
@@ -102,39 +102,116 @@ function Dashboard({user}) {
 </div>
 </div>
 
+{/* footer */}
+
 <footer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 !mt-4 ">
- <div className="w-full h-56 rounded border border-[#E7D7BB] shadow-sm p-4">
-  <h1 className="text-2xl font-bold text-center !mt-4 !mb-4 text-[#2F241D]">
-  Features
-</h1>
+ <div className="w-full h-66 rounded-xl border border-[#E7D7BB] shadow-sm p-5 ">
+  <h2 className="text-xl font-bold text-center text-[#2F241D] mb-5 !mt-2">
+    Features
+  </h2>
 
-  <ul className="!mt-5">
-    <li className="flex items-center gap-3 py-3 border-b border-[#E7D7BB]/40 !mt-2 !ml-2  transition-all hover:bg-[#FBF7F0] hover:rounded-md cursor-pointer">
-      <Users size={20} className="text-violet-600" />
-      <span className="font-medium">Detailed profile overview</span>
+  <ul className="space-y-1 !mt-2">
+
+    <li className="!mt-3 !ml-2 flex items-center gap-3 py-3 px-2 border-b border-[#E7D7BB]/40 transition-all duration-200 hover:bg-[#FBF7F0] hover:rounded-lg cursor-pointer">
+      <div className=" w-9 h-9 rounded-full bg-violet-100 flex items-center justify-center">
+        <Users size={18} className="text-violet-600 " />
+      </div>
+
+      <span className="font-medium text-[#2F241D]">
+        Detailed profile overview
+      </span>
     </li>
 
-    <li className="flex items-center gap-3 py-3 border-b border-[#E7D7BB]/40 !mt-2 !ml-2  transition-all hover:bg-[#FBF7F0] hover:rounded-md cursor-pointer">
-      <FolderOpen size={20} className="text-yellow-500" />
-      <span className="font-medium">Repository insights</span>
+    <li className="!ml-2 !mt-3 flex items-center gap-3 py-3 px-2 border-b border-[#E7D7BB]/40 transition-all duration-200 hover:bg-[#FBF7F0] hover:rounded-lg cursor-pointer">
+      <div className="w-9 h-9 rounded-full bg-yellow-100 flex items-center justify-center">
+        <FolderOpen size={18} className="text-yellow-500" />
+      </div>
+
+      <span className="font-medium text-[#2F241D]">
+        Repository insights
+      </span>
     </li>
 
-    <li className="flex items-center gap-3 py-3 border-b border-[#E7D7BB]/40 !mt-2 !ml-2  transition-all hover:bg-[#FBF7F0] hover:rounded-md cursor-pointer ">
-      <Code2 size={20} className="text-green-600" />
-      <span className="font-medium">Language statistics</span>
+    <li className=" !ml-2 !mt-3 flex items-center gap-3 py-3 px-2 border-b border-[#E7D7BB]/40 transition-all duration-200 hover:bg-[#FBF7F0] hover:rounded-lg cursor-pointer">
+      <div className="w-9 h-9 rounded-full bg-green-100 flex items-center justify-center">
+        <Code2 size={18} className="text-green-600" />
+      </div>
+
+      <span className="font-medium text-[#2F241D]">
+        Language statistics
+      </span>
     </li>
 
-    <li className="flex items-center gap-3 py-3 !mt-2 !ml-2  transition-all hover:bg-[#FBF7F0] hover:rounded-md cursor-pointer">
-      <Sparkles size={20} className="text-purple-600" />
-      <span className="font-medium">AI powered analysis</span>
+    <li className="!ml-2 !mt-3 flex items-center gap-3 py-3 px-2 transition-all duration-200 hover:bg-[#FBF7F0] hover:rounded-lg cursor-pointer">
+      <div className="w-9 h-9 rounded-full bg-purple-100 flex items-center justify-center">
+        <Sparkles size={18} className="text-purple-600" />
+      </div>
+
+      <span className="font-medium text-[#2F241D]">
+        AI Powered Analysis
+      </span>
     </li>
+
   </ul>
 </div>
+  <div className="w-full h-66 rounded-xl border border-[#E7D7BB] shadow-sm"></div>
 
-  <div className="w-full h-56 rounded border border-[#E7D7BB] shadow-sm"></div>
+<div className="w-full h-66 rounded-xl border border-[#E7D7BB] shadow-sm p-5">
+  <h2 className="text-lg font-bold text-center text-[#2F241D] mb-5 !mt-2">
+    How It Works
+  </h2>
 
-  <div className="w-full h-56 rounded border border-[#E7D7BB] shadow-sm"></div>
-</footer>
+  <div className="space-y-4 !mt-3">
+
+    <div className=" lg:!mt-5 flex items-start gap-4 !mt-2 ">
+      <div className="w-8 h-8 rounded-full bg-[#E7D7BB] text-[#2F241D] flex items-center justify-center font-bold !ml-2">
+        1
+      </div>
+
+      <div>
+        <h3 className="font-semibold text-[#2F241D] text-sm">
+          Enter GitHub Username
+        </h3>
+
+       <p className="lg:!mt-2 text-xs opacity-60 font-semibold">
+          Type any public GitHub username into the search bar.
+        </p>
+      </div>
+    </div>
+
+    <div className="lg:!mt-5 flex items-start gap-4 !mt-3">
+      <div className="w-8 h-8 rounded-full bg-[#E7D7BB] text-[#2F241D] flex items-center justify-center font-bold !ml-2">
+        2
+      </div>
+
+      <div>
+        <h3 className="font-semibold text-[#2F241D] text-sm">
+          Click Generate
+        </h3>
+
+<p className="lg:!mt-2 text-xs opacity-60 font-semibold">
+          We'll fetch and analyze the profile data.
+        </p>
+      </div>
+    </div>
+
+    <div className="lg:!mt-5 flex items-start gap-4 !mt-3">
+      <div className="w-8 h-8 rounded-full bg-[#E7D7BB] text-[#2F241D] flex items-center justify-center font-bold !ml-2">
+        3
+      </div>
+
+      <div>
+        <h3 className="font-semibold text-[#2F241D] text-sm">
+          Explore Insights
+        </h3>
+<p className="lg:!mt-2 text-xs opacity-60 font-semibold">
+  View stats, repository analytics and language usage.
+</p>
+      </div>
+    </div>
+
+  </div>
+</div></footer>
 
 
     </div>
