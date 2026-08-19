@@ -7,6 +7,9 @@ import {
   Star,
   Code2,
   Sparkles,
+   History,
+  X,
+  ArrowUpRight,
 } from "lucide-react";
 
 function Dashboard({user}) {
@@ -154,8 +157,27 @@ function Dashboard({user}) {
 
   </ul>
 </div>
-  <div className="w-full h-66 rounded-xl border border-[#E7D7BB] shadow-sm"></div>
 
+
+ <div className="w-full h-66 rounded-xl border border-[#E7D7BB] shadow-sm p-5 flex flex-col items-center justify-center text-center">
+
+  <div className="w-12 h-12 rounded-full bg-[#FBF7F0] flex items-center justify-center mb-3">
+    <History size={22} className="text-[#2F241D]" />
+  </div>
+
+  <h2 className="text-lg font-bold text-[#2F241D]">
+    No Recent Searches
+  </h2>
+
+  <p className="text-sm text-gray-500 mt-2 max-w-xs">
+    Your recently searched GitHub profiles will appear here.
+  </p>
+
+  <button className="mt-4 px-4 py-2 rounded-lg bg-[#E7D7BB] text-[#2F241D] text-sm font-semibold hover:bg-[#DCC8A5] transition">
+    Search GitHub
+  </button>
+
+</div>
 <div className="w-full h-66 rounded-xl border border-[#E7D7BB] shadow-sm p-5">
   <h2 className="text-lg font-bold text-center text-[#2F241D] mb-5 !mt-2">
     How It Works
@@ -209,11 +231,9 @@ function Dashboard({user}) {
 </p>
       </div>
     </div>
-
   </div>
-</div></footer>
-
-
+</div>
+</footer>
     </div>
   );
 }
