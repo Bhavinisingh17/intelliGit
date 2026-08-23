@@ -11,6 +11,7 @@ IntelliGit is a GitHub profile analytics dashboard that lets users explore any p
 - 💻 View primary programming language
 - 📝 Repository description
 - 🔗 Direct link to GitHub repositories
+- 🕒 Store and view GitHub search history
 - 📱 Responsive dashboard interface
 
 ## 🛠️ Tech Stack
@@ -24,7 +25,13 @@ IntelliGit is a GitHub profile analytics dashboard that lets users explore any p
 - Node.js
 - Express.js
 
-**API**
+
+### Database
+- MongoDB
+- Mongoose
+
+
+## API
 - GitHub REST API
 
 ## 🚀 Future Updates

@@ -1,89 +1,188 @@
-.sidebar{
+/* ---------- Sidebar ---------- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 250px;
+  height: 100vh;
+
+  background: #e7d7bb;
+  border-right: 1px solid #e7d7bb;
+  overflow-y: auto;
+
+  padding: 24px 16px;
+  z-index: 50;
+
+  display: flex;
+  flex-direction: column;
+
+  /* mobile: hidden off-screen by default */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+/* mobile: slide in when open */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* desktop: always visible, sits in normal flow */
+@media (min-width: 768px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+}
+
+/* ---------- Overlay (mobile only, behind drawer) ---------- */
+.sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .sidebar-overlay.open {
+    display: block;
     position: fixed;
-    top: 0;
-    left: 0;
-
-    width: 250px;
-    height: 100vh;
-
-    background: #E7D7BB;
-    border-right: 1px solid #E7D7BB;
-    overflow-y: auto;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 40;
+  }
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    margin-bottom:40px;
-
-    color:#2F241D;
+/* ---------- Hamburger toggle button (mobile only) ---------- */
+.sidebar-toggle {
+  display: none;
 }
 
-.menu{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+@media (max-width: 767px) {
+  .sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    flex:1;
+    top: 14px;
+    left: 14px;
+    z-index: 60;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+
+    background: #e7d7bb;
+    border: none;
+    cursor: pointer;
+    color: #2f241d;
+    font-size: 18px;
+    margin-top: 1rem;
+  }
 }
 
-.menu-item{
-
-    display:flex;
-    align-items:center;
-
-    gap:12px;
-
-    padding:14px 18px;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    color:#6B5B4B;
-
-    transition:.3s;
+/* ---------- Close button inside drawer (mobile only) ---------- */
+.sidebar-close {
+  display: none;
 }
 
+@media (max-width: 767px) {
+  .sidebar-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.menu-item:hover{
-    background:#E7D7BB;
-    color:#2F241D;
+    margin-left: auto;
 
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #2f241d;
+    font-size: 16px;
+  }
 }
 
-.active{
-
-    background:#E7D7BB;
-
-    color:#2F241D;
-
-    font-weight:600;
-
+/* ---------- Page content offset ---------- */
+/* Add className="main-content" to the wrapper around your routed pages */
+.main-content {
+  margin-left: 0;
+  padding: 16px;
 }
 
-.logout{
-
-    background:none;
-
-    border:none;
-
-    cursor:pointer;
-
-    color:#7A6753;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    font-size:16px;
-
+@media (min-width: 768px) {
+  .main-content {
+    margin-left: 250px; /* matches .sidebar width */
+    padding: 24px;
+  }
 }
 
-.logout:hover{
+/* ---------- Logo ---------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-    background:#E7D7BB;
+  margin-bottom: 40px;
+  margin-top: 8px;
 
+  color: #2f241d;
+}
+
+@media (max-width: 767px) {
+  .logo {
+    margin-top: 44px; /* room so hamburger doesn't overlap it */
+  }
+}
+
+/* ---------- Menu ---------- */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  flex: 1;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 18px;
+  border-radius: 14px;
+
+  cursor: pointer;
+  color: #6b5b4b;
+  text-decoration: none;
+
+  transition: 0.3s;
+}
+
+.menu-item:hover {
+  background: #d9c4a0;
+  color: #2f241d;
+}
+
+.active {
+  background: #d9c4a0;
+  color: #2f241d;
+  font-weight: 600;
+}
+
+/* ---------- Logout ---------- */
+.logout {
+  background: none;
+  border: none;
+
+  cursor: pointer;
+  color: #7a6753;
+
+  padding: 14px;
+  border-radius: 12px;
+
+  font-size: 16px;
+}
+
+.logout:hover {
+  background: #d9c4a0;
 }

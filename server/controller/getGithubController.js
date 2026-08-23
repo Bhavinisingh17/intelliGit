@@ -1,3 +1,6 @@
+
+
+
 const getGithubProfile = async (req, res) => {
     const { username } = req.params;
 
@@ -9,6 +12,10 @@ const getGithubProfile = async (req, res) => {
 
         const user = await userRes.json();
         const repos = await repoRes.json();
+
+
+
+
 
 const formattedRepos = repos.map(repo => ({
     name: repo.name,
@@ -33,6 +40,9 @@ const formattedRepos = repos.map(repo => ({
             repos: formattedRepos
         });
     } catch (err) {
+
+            console.log("GITHUB ERROR:", err);
+
         res.status(500).json({
             message: "Something went wrong"
         });

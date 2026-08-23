@@ -12,7 +12,15 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-function Dashboard({user}) {
+function Dashboard({ 
+    user,
+    searchHistory,
+    deleteHistory,
+    clearHistory
+   }) {
+
+  
+
   return (
     <div>
       <header className="w-full bg-[#E7D7BB] rounded-lg px-6 md:px-10 py-8">
@@ -108,7 +116,7 @@ function Dashboard({user}) {
 {/* footer */}
 
 <footer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 !mt-4 ">
- <div className="w-full h-66 rounded-xl border border-[#E7D7BB] shadow-sm p-5 ">
+ <div className="w-full h-auto rounded-xl border border-[#E7D7BB] shadow-sm p-5 ">
   <h2 className="text-xl font-bold text-center text-[#2F241D] mb-5 !mt-2">
     Features
   </h2>
@@ -158,27 +166,113 @@ function Dashboard({user}) {
   </ul>
 </div>
 
+{searchHistory.length === 0 ? (
 
- <div className="w-full h-66 rounded-xl border border-[#E7D7BB] shadow-sm p-5 flex flex-col items-center justify-center text-center">
+  // EMPTY STATE
+  <div className="w-full h-auto rounded-xl border border-[#E7D7BB] shadow-sm p-5 flex flex-col items-center justify-center text-center">
 
-  <div className="w-12 h-12 rounded-full bg-[#FBF7F0] flex items-center justify-center mb-3">
-    <History size={22} className="text-[#2F241D]" />
+    <div className="w-12 h-12 rounded-full bg-[#FBF7F0] flex items-center justify-center mb-3">
+      <History size={22} className="text-[#2F241D]" />
+    </div>
+
+    <h2 className="text-lg font-bold text-[#2F241D]">
+      No Recent Searches
+    </h2>
+
+    <p className="text-sm text-gray-500 mt-2 max-w-xs">
+      Your recently searched GitHub profiles will appear here.
+    </p>
+
   </div>
 
-  <h2 className="text-lg font-bold text-[#2F241D]">
-    No Recent Searches
-  </h2>
+) : (
 
-  <p className="text-sm text-gray-500 mt-2 max-w-xs">
-    Your recently searched GitHub profiles will appear here.
-  </p>
+  // HISTORY EXISTS
+  <div className="w-full h-auto rounded-xl border border-[#E7D7BB] shadow-sm p-5">
 
-  <button className="mt-4 px-4 py-2 rounded-lg bg-[#E7D7BB] text-[#2F241D] text-sm font-semibold hover:bg-[#DCC8A5] transition">
-    Search GitHub
-  </button>
+    <div className="flex items-center justify-between mb-4">
 
-</div>
-<div className="w-full h-66 rounded-xl border border-[#E7D7BB] shadow-sm p-5">
+      <div className="flex items-center gap-2">
+        <History size={19} className="text-[#2F241D] !ml-4 !mt-3" />
+
+        <h2 className="text-lg font-bold text-[#2F241D] !mt-3 !ml-3">
+          Recent Searches
+        </h2>
+      </div>
+
+      <button
+        onClick={clearHistory}
+        className="text-xs font-semibold text-gray-500 hover:text-red-500 transition !mr-2"
+      >
+        Clear All
+      </button>
+
+    </div>
+
+    <div className="space-y-2">
+
+      {searchHistory.map((item) => (
+
+        <div
+          key={item._id}
+          className="flex items-center justify-between p-2.5 rounded-lg hover:bg-[#FBF7F0] transition"
+        >
+
+          <div className="flex items-center !gap-3 !mt-2">
+
+            <img
+              src={item.avatar}
+              alt={item.username}
+              className="!w-9 !h-9 !rounded-full !ml-2"
+            />
+            <div className="!mt-2">
+              <p className="text-sm font-semibold text-[#2F241D]">
+                {item.username}
+              </p>
+
+              <p className="text-xs text-gray-500">
+          {new Date(item.searchedAt).toLocaleString()}
+              </p>
+            </div>
+
+          </div>
+
+          <div className="flex items-center gap-1">
+
+            <button
+              className="p-2 rounded-lg hover:bg-[#E7D7BB] transition"
+              title="Search again"
+            >
+              <ArrowUpRight
+                size={16}
+                className="text-[#2F241D]"
+              />
+            </button>
+
+            <button
+                onClick={() => deleteHistory(item._id)}
+              className="p-2 rounded-lg hover:bg-red-100 transition"
+              title="Remove"
+            >
+              <X
+                size={15}
+                className="text-gray-400"
+              />
+            </button>
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </div>
+
+)}
+
+<div className="w-full h-auto rounded-xl border border-[#E7D7BB] shadow-sm p-5 ">
   <h2 className="text-lg font-bold text-center text-[#2F241D] mb-5 !mt-2">
     How It Works
   </h2>

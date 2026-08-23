@@ -7,8 +7,7 @@ function SearchBar({ userName, setUsername, handleGenerate }) {
   };
 
   return (
-    <div className="w-full !px-2 sm:px-4 !py-4">
-
+<div className=" top-0 z-30 w-full !px-2 sm:px-4 sm:!pt-0 !pb-4 !mt-0 lg:pt-0">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         
 
@@ -119,8 +118,8 @@ function SearchBar({ userName, setUsername, handleGenerate }) {
             title="Notifications"
             className="
               relative
-              w-11
-              h-11
+              !w-[60px]
+              !h-11
               rounded-xl
               border
               border-[#E0D2BC]
