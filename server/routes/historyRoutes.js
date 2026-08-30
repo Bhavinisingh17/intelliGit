@@ -11,7 +11,7 @@ const {
 
 router.get("/", getHistory);
 
-router.post("/", addHistory);   // ⭐ ADD THIS
+router.post("/", addHistory);   
 
 router.delete("/:id", deleteHistory);
 

@@ -1,5 +1,7 @@
 const SearchHistory = require("../models/searchHistory");
 
+////CONTROLLER IS FOR ALL LOGIC
+
 
 // =========================
 // GET HISTORY
@@ -13,7 +15,6 @@ const getHistory = async (req, res) => {
             .sort({ searchedAt: -1 })
             .limit(5);
 
-        console.log("Retrieved:", history);
 
         res.status(200).json(history);
 
@@ -69,22 +70,15 @@ const addHistory = async (req, res) => {
 const deleteHistory = async (req, res) => {
 
     try {
-
         const { id } = req.params;
-
         const deletedHistory =
             await SearchHistory.findByIdAndDelete(id);
-
         if (!deletedHistory) {
-
             return res.status(404).json({
                 error: "History not found"
             });
-
         }
-
         console.log("Deleted:", deletedHistory);
-
         res.status(200).json({
             message: "History deleted successfully",
             deletedHistory

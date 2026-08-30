@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import "./sideBar.css";
 import { Link } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ isLoggedIn, setIsLoggedIn }) {
   const [open, setOpen] = useState(false);
+    const handleLogout = () => {
+    setIsLoggedIn(false);
+    setOpen(false);
+  };
+
 
   return (
     <>
@@ -24,8 +29,9 @@ function Sidebar() {
 
       <div className={`sidebar ${open ? "open" : ""}`}>
         <div className="logo">
-          ✨ <h2>IntelliGit</h2>
-          {/* Close button — only shows on mobile */}
+   <h1 className="text-4xl font-bold text-[#2F241D]">
+                        Intelli<span className="text-[#9A6848]">Git</span>
+                    </h1>          {/* Close button — only shows on mobile */}
           <button
             className="sidebar-close"
             onClick={() => setOpen(false)}
@@ -61,8 +67,33 @@ function Sidebar() {
           </Link>
         </nav>
 
-        <button className="logout">Logout</button>
-      </div>
+ {!isLoggedIn ? (
+    <>
+        <Link
+            to="/signup"
+            className="logout"
+            onClick={() => setOpen(false)}
+        >
+            Signup
+        </Link>
+
+        <Link
+            to="/login"
+            className="logout"
+            onClick={() => setOpen(false)}
+        >
+            Login
+        </Link>
+    </>
+) : (
+    <button
+        className="logout"
+        onClick={handleLogout}
+    >
+        Logout
+    </button>
+)}    
+        </div>
     </>
   );
 }

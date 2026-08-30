@@ -5,6 +5,10 @@ import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
 import Dashboard from "./components/dashboard/Dashboard.jsx";
 import Profile from "./components/profile/profile.jsx";
+import Signup from "./components/authentication/signup.jsx";
+import Login from "./components/authentication/login.jsx";
+
+
 import { useEffect, useState } from "react";
 
 function App() {
@@ -12,7 +16,7 @@ function App() {
   const [userName, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [repos, setRepos] = useState([]);
-
+const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchHistory, setSearchHistory] = useState([]);
 
 
@@ -58,17 +62,14 @@ function App() {
     if (!userName.trim()) return;
 
     try {
-
       const response = await fetch(
         `http://localhost:5000/api/github/${userName}`
       );
 
 if (!response.ok) {
   const errorText = await response.text();
-
   console.log("Backend status:", response.status);
   console.log("Backend response:", errorText);
-
   throw new Error("GitHub API request failed");
 }
       const data = await response.json();
@@ -115,7 +116,10 @@ if (!response.ok) {
 
     }
 
-  }
+  } 
+
+  // ~~~~~~~~~~// {when you clicked on handle generate then user generates
+  // and history generates} //
 
 
   // =========================
@@ -190,58 +194,111 @@ if (!response.ok) {
   // RETURN
   // =========================
 
-  return (
+return (
+  <Routes>
 
-    <div className="app">
+    {/* Signup */}
+    <Route
+      path="/signup"
+      element={<Signup />}
+    />
 
-      <Sidebar />
+    {/* Login */}
+    <Route
+      path="/login"
+      element={
+        <Login setIsLoggedIn={setIsLoggedIn} />
+      }
+    />
 
-      <div className="main-content">
+    {/* Dashboard */}
+    <Route
+      path="/"
+      element={
+        <div className="app">
 
-        <SearchBar
-          userName={userName}
-          setUsername={setUsername}
-          handleGenerate={handleGenerate}
-        />
-
-
-        <Routes>
-
-          <Route
-            path="/"
-            element={
-              <Dashboard
-                user={user}
-                searchHistory={searchHistory}
-                deleteHistory={deleteHistory}
-                clearHistory={clearHistory}
-              />
-            }
+          <Sidebar
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
           />
 
+          <div className="main-content">
 
-          <Route
-            path="/profile"
-            element={
-              <Profile user={user} />
-            }
+            <SearchBar
+              userName={userName}
+              setUsername={setUsername}
+              handleGenerate={handleGenerate}
+            />
+
+            <Dashboard
+              user={user}
+              searchHistory={searchHistory}
+              deleteHistory={deleteHistory}
+              clearHistory={clearHistory}
+            />
+
+          </div>
+
+        </div>
+      }
+    />
+
+    {/* Profile */}
+    <Route
+      path="/profile"
+      element={
+        <div className="app">
+
+          <Sidebar
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
           />
 
+          <div className="main-content">
 
-          <Route
-            path="/repo"
-            element={
-              <Repo repos={repos} />
-            }
+            <SearchBar
+              userName={userName}
+              setUsername={setUsername}
+              handleGenerate={handleGenerate}
+            />
+
+            <Profile user={user} />
+
+          </div>
+
+        </div>
+      }
+    />
+
+    {/* Repository */}
+    <Route
+      path="/repo"
+      element={
+        <div className="app">
+
+          <Sidebar
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
           />
 
-        </Routes>
+          <div className="main-content">
 
-      </div>
+            <SearchBar
+              userName={userName}
+              setUsername={setUsername}
+              handleGenerate={handleGenerate}
+            />
 
-    </div>
+            <Repo repos={repos} />
 
-  );
+          </div>
+
+        </div>
+      }
+    />
+
+  </Routes>
+);
 }
 
 export default App;
