@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const transporter = require("../config/email");
 
 const registerUser = async (username, email, password) => {
 
