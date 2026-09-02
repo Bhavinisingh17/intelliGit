@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
+const connectDb = require("./config/db");
 const cookieParser = require('cookie-parser');
 const authRoutes = require("./routes/userRoutes");
 const githubRoutes = require("./routes/githubRoutes");
@@ -10,13 +10,13 @@ const historyRoutes = require("./routes/historyRoutes");
 
 const app = express();
 
+///Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log(err));
+// Database
+connectDb();
 
 app.get("/", (req, res) => {
     res.send("Backend is running!");
