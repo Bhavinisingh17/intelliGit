@@ -110,10 +110,12 @@ const sendUserPasswordResetEmail = async (req, res) => {
     }
 };
 
+//reset password
+
 const userPasswordReset = async (req, res) => {
     try {
         const { password } = req.body;
-        const { userId, token } = req.params;
+        const { id, token } = req.params;
 
         if (!password) {
             return res.status(400).json({
@@ -122,8 +124,8 @@ const userPasswordReset = async (req, res) => {
             });
         }
 
-        await authService.resetUserPassword(
-            userId,
+        await authService.userPasswordReset(
+            id,
             token,
             password
         );

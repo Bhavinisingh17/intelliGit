@@ -1,12 +1,14 @@
 import SearchBar from "./components/SearchBar";
 import "./App.css";
 import Repo from "./components/repo";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
 import Dashboard from "./components/dashboard/Dashboard.jsx";
 import Profile from "./components/profile/profile.jsx";
 import Signup from "./components/authentication/signup.jsx";
 import Login from "./components/authentication/login.jsx";
+import ForgotPassword from "./components/authentication/forgotPassword";
+import AI from "./components/aiAnalysis/ai.jsx";
 
 
 import { useEffect, useState } from "react";
@@ -16,7 +18,7 @@ function App() {
   const [userName, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [repos, setRepos] = useState([]);
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchHistory, setSearchHistory] = useState([]);
 
 
@@ -27,12 +29,22 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
 
     const fetchHistory = async () => {
+       const token = localStorage.getItem("token");
+
+      if (!token) {
+            return;
+        }
 
       try {
 
-        const response = await fetch(
-          "http://localhost:5000/api/history"
-        );
+         const response = await fetch(
+          "http://localhost:5000/api/history",
+        {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+);
 
         const data = await response.json();
 
@@ -50,7 +62,7 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     fetchHistory();
 
-  }, []);
+  }, [isLoggedIn]);
 
 
   // =========================
@@ -68,12 +80,10 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 if (!response.ok) {
   const errorText = await response.text();
-  console.log("Backend status:", response.status);
-  console.log("Backend response:", errorText);
+  
   throw new Error("GitHub API request failed");
 }
       const data = await response.json();
-    console.log("GitHub data:", data)
 
       setUser(data.user);
       setRepos(data.repos);
@@ -82,14 +92,15 @@ if (!response.ok) {
       // =========================
       // SAVE SEARCH IN MONGODB
       // =========================
-
+     const token = localStorage.getItem("token");
       const historyResponse = await fetch(
         "http://localhost:5000/api/history",
         {
           method: "POST",
 
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+             Authorization: `Bearer ${token}`
           },
 
           body: JSON.stringify({
@@ -129,11 +140,14 @@ if (!response.ok) {
   const deleteHistory = async (id) => {
 
     try {
-
+    const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:5000/api/history/${id}`,
         {
-          method: "DELETE"
+          method: "DELETE",
+           headers: {
+          Authorization: `Bearer ${token}`
+        }
         }
       );
 
@@ -164,11 +178,14 @@ if (!response.ok) {
   const clearHistory = async () => {
 
     try {
-
+      const token = localStorage.getItem("token");
       const response = await fetch(
         "http://localhost:5000/api/history",
         {
-          method: "DELETE"
+          method: "DELETE",
+           headers: {
+          Authorization: `Bearer ${token}`
+        }
         }
       );
 
@@ -197,6 +214,10 @@ if (!response.ok) {
 return (
   <Routes>
 
+    ///forgot password router
+
+    <Route path = "/forgot" element= {<ForgotPassword></ForgotPassword>}></Route>
+
     {/* Signup */}
     <Route
       path="/signup"
@@ -213,35 +234,39 @@ return (
 
     {/* Dashboard */}
     <Route
-      path="/"
-      element={
-        <div className="app">
+  path="/"
+  element={
+    isLoggedIn ? (
+      <div className="app">
 
-          <Sidebar
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
+        <Sidebar
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+
+        <div className="main-content">
+
+          <SearchBar
+            userName={userName}
+            setUsername={setUsername}
+            handleGenerate={handleGenerate}
           />
 
-          <div className="main-content">
-
-            <SearchBar
-              userName={userName}
-              setUsername={setUsername}
-              handleGenerate={handleGenerate}
-            />
-
-            <Dashboard
-              user={user}
-              searchHistory={searchHistory}
-              deleteHistory={deleteHistory}
-              clearHistory={clearHistory}
-            />
-
-          </div>
+          <Dashboard
+            user={user}
+            searchHistory={searchHistory}
+            deleteHistory={deleteHistory}
+            clearHistory={clearHistory}
+          />
 
         </div>
-      }
-    />
+
+      </div>
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
 
     {/* Profile */}
     <Route
@@ -295,6 +320,11 @@ return (
 
         </div>
       }
+    />
+
+    <Route
+    path = "/ai-analysis"
+    element= {<AI/>}
     />
 
   </Routes>

@@ -58,7 +58,7 @@ function Sidebar({ isLoggedIn, setIsLoggedIn }) {
             📈 Statistics
           </Link>
 
-          <Link to="/analysis" className="menu-item" onClick={() => setOpen(false)}>
+          <Link to="/ai-analysis" className="menu-item" onClick={() => setOpen(false)}>
             🤖 AI Analysis
           </Link>
 

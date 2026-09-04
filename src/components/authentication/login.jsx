@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 function Login({ setIsLoggedIn }) {
     const navigate = useNavigate();
-
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -35,10 +33,12 @@ function Login({ setIsLoggedIn }) {
             const data = await response.json();
 
             if (!response.ok) {
-setError(data?.message || "Invalid email or password. Try again.");                return;
+             setError(data?.message || "Invalid email or password. Try again.");  
+                  return;
             }
 
             console.log(data);
+            localStorage.setItem("token", data.token);
             setIsLoggedIn(true);
             navigate("/");
 
@@ -169,6 +169,12 @@ setError(data?.message || "Invalid email or password. Try again.");             
                         </Link>
                     </p>
 
+                     <Link
+                            to="/forgot"
+                            className="text-sm text-[#9A6848] hover:text-[#2F241D] transition"
+                        >
+                     Forgot Password ?                  
+                         </Link>
                 </div>
 
 

@@ -9,12 +9,15 @@ const {
     clearHistory
 } = require("../controller/historyController");
 
-router.get("/", getHistory);
+const protect = require("../middleware/authMiddleware");
 
-router.post("/", addHistory);   
 
-router.delete("/:id", deleteHistory);
+router.get("/", protect, getHistory);
 
-router.delete("/", clearHistory);
+router.post("/", protect, addHistory);   
+
+router.delete("/:id", protect, deleteHistory);
+
+router.delete("/", protect, clearHistory);
 
 module.exports = router;

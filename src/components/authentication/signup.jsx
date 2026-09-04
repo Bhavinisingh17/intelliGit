@@ -42,7 +42,7 @@ function Signup() {
             }
 
             console.log(data);
-            navigate("/login");
+            navigate("/");
 
         } catch (error) {
             console.log(error);

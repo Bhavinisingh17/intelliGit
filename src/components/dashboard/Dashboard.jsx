@@ -14,13 +14,10 @@ import {
 
 function Dashboard({ 
     user,
-    searchHistory,
+    searchHistory = [],
     deleteHistory,
     clearHistory
    }) {
-
-  
-
   return (
     <div>
       <header className="w-full bg-[#E7D7BB] rounded-lg px-6 md:px-10 py-8">

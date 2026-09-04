@@ -11,7 +11,9 @@ const getHistory = async (req, res) => {
     try {
 
         const history = await SearchHistory
-            .find()
+            .find({
+              userId: req.user._id
+            })
             .sort({ searchedAt: -1 })
             .limit(5);
 
@@ -41,6 +43,7 @@ const addHistory = async (req, res) => {
         const { username, avatar } = req.body;
 
         const newHistory = new SearchHistory({
+            userId: req.user._id,
             username,
             avatar,
             searchedAt: new Date()
@@ -72,7 +75,11 @@ const deleteHistory = async (req, res) => {
     try {
         const { id } = req.params;
         const deletedHistory =
-            await SearchHistory.findByIdAndDelete(id);
+            await SearchHistory.findOneAndDelete(
+                {_id: id,
+                userId: req.user._id
+                }
+            );
         if (!deletedHistory) {
             return res.status(404).json({
                 error: "History not found"
@@ -104,7 +111,9 @@ const clearHistory = async (req, res) => {
 
     try {
 
-        await SearchHistory.deleteMany({});
+        await SearchHistory.deleteMany({ 
+             userId: req.user._id
+});
 
         console.log("All history deleted");
 

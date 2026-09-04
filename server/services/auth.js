@@ -118,17 +118,19 @@ console.log(user);
 
 
 ///reset password
-const userPasswordReset = async(userId, token, password) => {
-    const user = await User.find(userId);
+const userPasswordReset = async (userId, token, password) => {
+
+    const user = await User.findById(userId);
 
     if (!user) {
         throw new Error("User not found");
     }
 
-   const newsecret = user._id + process.env.JWT_SECRET_KEY;
+    const newsecret = user._id.toString() + process.env.JWT_SECRET_KEY;
+
     const decoded = jwt.verify(token, newsecret);
 
-    if (decoded.userID !== userId) {
+    if (decoded.userID.toString() !== userId.toString()) {
         throw new Error("Invalid reset token");
     }
 
@@ -139,8 +141,7 @@ const userPasswordReset = async(userId, token, password) => {
     await user.save();
 
     return user;
-
-}
+};
 
 module.exports = {
     registerUser,
