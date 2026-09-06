@@ -18,7 +18,7 @@ function App() {
   const [userName, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [repos, setRepos] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(  !!localStorage.getItem("token"));
   const [searchHistory, setSearchHistory] = useState([]);
 
 
@@ -50,9 +50,26 @@ function App() {
 
         console.log("History:", data);
 
-        setSearchHistory(data);
 
-      } catch (error) {
+        if (!response.ok) {
+  console.error("History request failed:", data);
+
+  setSearchHistory([]);
+
+  // Token expired
+  if (response.status === 401) {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  }
+
+     return;
+
+      } 
+    setSearchHistory(Array.isArray(data) ? data : []);
+    }
+
+      
+      catch (error) {
 
         console.log("History error:", error);
 
@@ -322,10 +339,28 @@ return (
       }
     />
 
+///AI ANALYSIS
+
+
     <Route
-    path = "/ai-analysis"
-    element= {<AI/>}
-    />
+  path="/ai-analysis"
+  element={
+    isLoggedIn ? (
+      <div className="app">
+        <Sidebar
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+
+        <div className="main-content">
+     <AI user={user} repos={repos} />       
+ </div>
+      </div>
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
 
   </Routes>
 );
